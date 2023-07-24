@@ -1,13 +1,13 @@
-import 'package:equatable/equatable.dart';
+import 'package:pokemon_app/features/pokemon_list/domain/entities/pokemon.dart';
 
-class PokemonModel extends Equatable {
-  final String? name;
-  final String? url;
-
-  const PokemonModel({required this.name, required this.url});
-
-  @override
-  List<Object?> get props => [name, url];
+class PokemonModel extends PokemonEntity {
+  const PokemonModel({
+    String? name,
+    String? url,
+  }) : super(
+          name: name,
+          url: url,
+        );
 
   factory PokemonModel.fromJson(Map<String, String> json) {
     return PokemonModel(name: json['name'], url: json['url']);

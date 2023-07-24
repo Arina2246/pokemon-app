@@ -1,20 +1,18 @@
 import 'package:pokemon_app/features/pokemon_list/data/models/pokemon.dart';
-import 'package:equatable/equatable.dart';
+import 'package:pokemon_app/features/pokemon_list/domain/entities/pokemon_list.dart';
 
-class PokemonsListModel extends Equatable {
-  final List<PokemonModel>? pokemonList;
-  final int? count;
-  final String? next;
-  final String? previous;
-
-  const PokemonsListModel(
-      {required this.pokemonList,
-      required this.count,
-      required this.next,
-      required this.previous});
-
-  @override
-  List<Object?> get props => [pokemonList, count, next, previous];
+class PokemonsListModel extends PokemonsListEntity {
+  const PokemonsListModel({
+    List<PokemonModel>? pokemonList,
+    int? count,
+    String? next,
+    String? previous,
+  }) : super(
+          pokemonList: pokemonList,
+          count: count,
+          next: next,
+          previous: previous,
+        );
 
   factory PokemonsListModel.fromJson(Map<String, dynamic> json) {
     return PokemonsListModel(
