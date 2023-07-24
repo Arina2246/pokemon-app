@@ -1,13 +1,13 @@
 import 'package:pokemon_app/features/pokemon_list/data/models/pokemon.dart';
 import 'package:equatable/equatable.dart';
 
-class PokemonsListEntity extends Equatable {
+class PokemonListEntity extends Equatable {
   final List<PokemonModel>? pokemonList;
   final int? count;
   final String? next;
   final String? previous;
 
-  const PokemonsListEntity(
+  const PokemonListEntity(
       {this.pokemonList, this.count, this.next, this.previous});
 
   @override
