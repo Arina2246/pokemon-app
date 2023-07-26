@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [BlocProvider(create: (context) => PokemonListBloc())],
         child: MaterialApp(
-          title: 'Pagination Example with Flutter',
+          title: 'Pokemon app',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(useMaterial3: true),
           home: const PokemonListPage(),
@@ -23,4 +23,4 @@ class MyApp extends StatelessWidget {
   }
 }
 
-//todo: impl usecases db, impl pagination, impl markup,
+//todo: impl usecases db, impl pagination

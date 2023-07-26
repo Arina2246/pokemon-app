@@ -30,8 +30,8 @@ class PaginationWidget<t> extends StatelessWidget {
           List<PokemonModel>? pokemonList = state.pokemonList.pokemonList;
           return NotificationListener<ScrollEndNotification>(
               onNotification: (scrollInfo) {
-                scrollInfo.metrics.pixels ==
-                            scrollInfo.metrics.maxScrollExtent &&
+                scrollInfo.metrics.pixels >
+                            scrollInfo.metrics.maxScrollExtent - 20 &&
                         !(state.pokemonList.next == null)
                     ? loadMore()
                     : null;

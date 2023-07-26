@@ -40,7 +40,24 @@ dependencies:
   http: ^1.1.0
   flutter_hooks: ^0.19.0
   cached_network_image: ^3.2.3
-  infinite_scroll_pagination: ^3.2.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: 'assets/icons/alien-head.png'
+  min_sdk_android: 21
+  remove_alpha_ios: true
+  web:
+    generate: true
+    image_path: 'assets/icons/alien-head.png'
+  windows:
+    generate: true
+    image_path: 'assets/icons/alien-head.png'
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: 'assets/icons/alien-head.png'
 
 dev_dependencies:
   flutter_test:
