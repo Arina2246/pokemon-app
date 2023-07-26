@@ -9,7 +9,7 @@ class PokemonModel extends PokemonEntity {
           url: url,
         );
 
-  factory PokemonModel.fromJson(Map<String, String> json) {
+  factory PokemonModel.fromJson(Map<String, dynamic> json) {
     return PokemonModel(name: json['name'], url: json['url']);
   }
 }

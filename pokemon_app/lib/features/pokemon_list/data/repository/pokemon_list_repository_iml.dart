@@ -9,9 +9,9 @@ import 'package:pokemon_app/features/pokemon_list/domain/repository/pokemon_list
 class PokemonListRepositoryImpl implements PokemonListRepository {
   @override
   Future<Either<Failure, PokemonListEntity>> getPokemonList(
-      {required int offset}) async {
+      {required String url}) async {
     try {
-      final response = await PokemonApiService.get(offset);
+      final response = await PokemonApiService.get(url);
       if (response.statusCode == 200) {
         var json = jsonDecode(response.body);
         PokemonListModel products = PokemonListModel.fromJson(json);

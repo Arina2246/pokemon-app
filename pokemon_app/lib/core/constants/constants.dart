@@ -1,2 +1,1 @@
-const String pokemonURL = 'https://pokeapi.co/api/v2';
-const String limitQuery = '20';
+const String initialPokemonURL = 'https://pokeapi.co/api/v2/pokemon';

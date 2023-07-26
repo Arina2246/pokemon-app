@@ -4,5 +4,5 @@ import 'package:pokemon_app/features/pokemon_list/domain/entities/pokemon_list.d
 
 abstract class PokemonListRepository {
   Future<Either<Failure, PokemonListEntity>> getPokemonList(
-      {required int offset});
+      {required String url});
 }
