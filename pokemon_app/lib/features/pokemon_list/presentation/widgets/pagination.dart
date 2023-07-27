@@ -1,25 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_app/features/pokemon_list/data/models/pokemon.dart';
-import 'package:pokemon_app/features/pokemon_list/presentation/bloc/pokemon_list_bloc.dart';
+import 'package:pokemon_app/features/pokemon_list/presentation/bloc/pokemon_list/pokemon_list_bloc.dart';
+import 'package:pokemon_app/features/pokemon_list/presentation/widgets/empty.dart';
+import 'package:pokemon_app/features/pokemon_list/presentation/widgets/error.dart';
+import 'package:pokemon_app/features/pokemon_list/presentation/widgets/loading.dart';
 
 class PaginationWidget<t> extends StatelessWidget {
   final Function() loadMore;
-  final Widget initialError;
-  final Widget initialLoading;
-  final Widget initialEmpty;
   final Widget Function(t p) child;
-  final Widget? onLoadMoreError;
-  final Widget? onLoadMoreLoading;
   const PaginationWidget(
-      {Key? key,
-      required this.loadMore,
-      required this.initialError,
-      required this.initialLoading,
-      required this.initialEmpty,
-      this.onLoadMoreError,
-      this.onLoadMoreLoading,
-      required this.child})
+      {Key? key, required this.loadMore, required this.child})
       : super(key: key);
 
   @override
@@ -45,20 +36,20 @@ class PaginationWidget<t> extends StatelessWidget {
                           itemBuilder: (context, index) =>
                               child(pokemonList?[index] as t))),
                   if (state.error != null)
-                    Expanded(child: onLoadMoreError ?? initialError),
+                    const Expanded(child: CustomErrorWidget()),
                   if (state.loading != null)
-                    Expanded(child: onLoadMoreLoading ?? initialLoading),
+                    const Expanded(child: LoadingWidget()),
                 ],
               ));
         }
         if (state is PokemonListInitialLoading) {
-          return initialLoading;
+          return const LoadingWidget();
         }
         if (state is PokemonListEmpty) {
-          return initialEmpty;
+          return const EmptyWidget();
         }
         if (state is PokemonListInitialError) {
-          return initialError;
+          return const CustomErrorWidget();
         }
         return const SizedBox.shrink();
       },

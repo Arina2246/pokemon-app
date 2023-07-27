@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokemon_app/config/colors/colors.dart';
 import 'package:pokemon_app/features/pokemon_list/data/models/pokemon.dart';
+import 'package:pokemon_app/features/pokemon_list/presentation/pages/pokemon_details.dart';
 
 class PokemonCard extends StatelessWidget {
   final PokemonModel pokemon;
@@ -9,14 +10,14 @@ class PokemonCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () {
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute(builder: (context) {
-      //       return PokemonPage(title: title, urlPokemon: urlPokemon);
-      //     }),
-      //   );
-      // },
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) {
+            return PokemonDetailsPage(urlPokemon: pokemon.url ?? '');
+          }),
+        );
+      },
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
         width: MediaQuery.of(context).size.width,

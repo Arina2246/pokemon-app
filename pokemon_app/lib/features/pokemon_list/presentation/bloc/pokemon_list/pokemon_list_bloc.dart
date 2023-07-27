@@ -4,7 +4,7 @@ import 'package:pokemon_app/features/pokemon_list/data/models/pokemon_list.dart'
 import 'package:pokemon_app/features/pokemon_list/data/repository/pokemon_list_repository_iml.dart';
 import 'package:pokemon_app/features/pokemon_list/domain/entities/pokemon_list.dart';
 
-import '../../../../core/constants/constants.dart';
+import '../../../../../core/constants/constants.dart';
 
 part 'pokemon_list_event.dart';
 part 'pokemon_list_state.dart';
