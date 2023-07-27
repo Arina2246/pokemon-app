@@ -16,13 +16,13 @@ class PokemonListModel extends PokemonListEntity {
 
   factory PokemonListModel.fromJson(Map<String, dynamic> json) {
     return PokemonListModel(
-        pokemonList: parseProducts(json['results']),
+        pokemonList: parsePokemons(json['results']),
         count: json['count'],
         next: json['next'],
         previous: json['previous']);
   }
 
-  static List<PokemonModel> parseProducts(List<dynamic> p) {
+  static List<PokemonModel> parsePokemons(List<dynamic> p) {
     return List.generate(p.length, (index) => PokemonModel.fromJson(p[index]));
   }
 }
