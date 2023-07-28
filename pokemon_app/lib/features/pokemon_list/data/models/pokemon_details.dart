@@ -26,8 +26,4 @@ class PokemonDetailsModel extends PokemonDetailsEntity {
           .toList() as List<dynamic>,
     );
   }
-
-  // static PokemonPage pokemonFromSnapshot(snapshot) {
-  // return PokemonPage.fromJson(snapshot);
-  // }
 }
