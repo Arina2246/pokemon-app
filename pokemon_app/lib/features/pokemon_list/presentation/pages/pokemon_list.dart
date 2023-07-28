@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokemon_app/config/colors/colors.dart';
 import 'package:pokemon_app/features/pokemon_list/data/models/pokemon.dart';
 import 'package:pokemon_app/features/pokemon_list/presentation/bloc/pokemon_list/pokemon_list_bloc.dart';
 import 'package:pokemon_app/features/pokemon_list/presentation/widgets/card.dart';
@@ -23,24 +22,25 @@ class _PokemonListPage extends State<PokemonListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Pokemon App",
-            style: TextStyle(
-              color: primaryColor,
-              fontSize: 20,
-            ),
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: const Text(
+          "Pokemon App",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 15,
           ),
-          centerTitle: true,
         ),
-        body: PaginationWidget<PokemonModel>(
-          loadMore: () {
-            BlocProvider.of<PokemonListBloc>(context)
-                .add(PokemonListLoadEvent());
-          },
-          child: (PokemonModel productModel) {
-            return PokemonCard(pokemon: productModel);
-          },
-        ));
+        centerTitle: true,
+      ),
+      body: PaginationWidget<PokemonModel>(
+        loadMore: () {
+          BlocProvider.of<PokemonListBloc>(context).add(PokemonListLoadEvent());
+        },
+        child: (PokemonModel productModel) {
+          return PokemonCard(pokemon: productModel);
+        },
+      ),
+    );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pokemon_app/config/colors/colors.dart';
 import 'package:pokemon_app/features/pokemon_list/data/models/pokemon.dart';
 import 'package:pokemon_app/features/pokemon_list/presentation/pages/pokemon_details.dart';
 
@@ -21,13 +20,13 @@ class PokemonCard extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 22, vertical: 10),
         width: MediaQuery.of(context).size.width,
-        height: 100,
+        height: 60,
         decoration: BoxDecoration(
-          color: primaryColor,
+          color: Colors.black,
           borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
-              color: primaryColor.withOpacity(0.6),
+              color: Colors.black.withOpacity(0.6),
               offset: const Offset(
                 0.0,
                 10.0,
@@ -45,7 +44,7 @@ class PokemonCard extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 5.0),
                 child: Text(
                   pokemon.name ?? '',
-                  style: const TextStyle(fontSize: 20, color: Colors.white),
+                  style: const TextStyle(fontSize: 15, color: Colors.white),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   textAlign: TextAlign.center,

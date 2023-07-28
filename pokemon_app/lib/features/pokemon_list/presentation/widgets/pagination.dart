@@ -42,6 +42,9 @@ class PaginationWidget<t> extends StatelessWidget {
                 ],
               ));
         }
+        if (state is PokemonListInitial) {
+          return const LoadingWidget();
+        }
         if (state is PokemonListInitialLoading) {
           return const LoadingWidget();
         }
