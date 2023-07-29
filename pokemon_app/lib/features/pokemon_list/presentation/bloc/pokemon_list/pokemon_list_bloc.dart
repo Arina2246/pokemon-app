@@ -10,6 +10,7 @@ part 'pokemon_list_event.dart';
 part 'pokemon_list_state.dart';
 
 class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
+  bool isInitial = true;
   PokemonListEntity pokemonList = const PokemonListEntity(
     pokemonList: [],
     count: 0,
@@ -19,30 +20,35 @@ class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
   PokemonListBloc() : super(PokemonListInitial()) {
     on<PokemonListEvent>((event, emit) async {
       if (event is PokemonListLoadEvent) {
-        bool isInitial = pokemonList.previous == null;
-        isInitial
-            ? emit(PokemonListInitialLoading(message: 'Fetching pokemons....'))
-            : emit(PokemonListLoaded(
-                pokemonList: pokemonList,
-                loading: LoadingMore(message: 'Fetching more pokemons...')));
+        isInitial = event.isInitial;
         final response = await PokemonListRepositoryImpl()
             .getPokemonList(url: pokemonList.next ?? initialPokemonURL);
         response.fold(
-            (l) => isInitial
-                ? emit(
-                    PokemonListInitialError(message: 'Failed to load pokemons'))
-                : emit(PokemonListLoaded(
-                    pokemonList: pokemonList,
-                    error: LoadMoreError(
-                        message: 'Failed to load more pokemons'))), (r) {
-          pokemonList = PokemonListModel(
-            pokemonList: pokemonList.pokemonList! + r.pokemonList!,
-            count: r.count,
-            next: r.next,
-            previous: r.previous,
-          );
-          emit(PokemonListLoaded(pokemonList: pokemonList));
-        });
+            (l) => emit(
+                PokemonListInitialError(message: 'Failed to load pokemons')),
+            (r) => {
+                  if (isInitial)
+                    {
+                      pokemonList = PokemonListModel(
+                        pokemonList: r.pokemonList,
+                        count: r.count,
+                        next: r.next,
+                        previous: r.previous,
+                      ),
+                      if (pokemonList.pokemonList!.isEmpty)
+                        {emit(PokemonListEmpty())},
+                    }
+                  else
+                    {
+                      pokemonList = PokemonListModel(
+                        pokemonList: pokemonList.pokemonList! + r.pokemonList!,
+                        count: r.count,
+                        next: r.next,
+                        previous: r.previous,
+                      ),
+                    },
+                  emit(PokemonListLoaded(pokemonList: pokemonList))
+                });
       }
     });
   }

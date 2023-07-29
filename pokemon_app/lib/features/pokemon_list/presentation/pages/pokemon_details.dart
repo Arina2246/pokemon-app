@@ -87,13 +87,13 @@ class _PokemonPageState extends State<PokemonDetailsPage> {
                             height: 10,
                           ),
                           Text(
-                            'Weight: ${pokemonDetails.weight ?? ''}',
+                            'Weight: ${pokemonDetails.weight! / 10}kg',
                           ),
                           const SizedBox(
                             height: 10,
                           ),
                           Text(
-                            'Height: ${pokemonDetails.height ?? ''}',
+                            'Height: ${pokemonDetails.height! * 10}cm',
                           ),
                           const SizedBox(
                             height: 20,

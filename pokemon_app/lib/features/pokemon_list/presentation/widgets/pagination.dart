@@ -6,12 +6,40 @@ import 'package:pokemon_app/features/pokemon_list/presentation/widgets/empty.dar
 import 'package:pokemon_app/features/pokemon_list/presentation/widgets/error.dart';
 import 'package:pokemon_app/features/pokemon_list/presentation/widgets/loading.dart';
 
-class PaginationWidget<t> extends StatelessWidget {
-  final Function() loadMore;
-  final Widget Function(t p) child;
-  const PaginationWidget(
-      {Key? key, required this.loadMore, required this.child})
-      : super(key: key);
+class PaginationWidget<t> extends StatefulWidget {
+  final Widget Function(PokemonModel p) child;
+
+  const PaginationWidget({
+    super.key,
+    required this.child,
+  });
+
+  @override
+  State<PaginationWidget> createState() => _PaginationWidgetState();
+}
+
+class _PaginationWidgetState extends State<PaginationWidget> {
+  late ScrollController _controller;
+  bool _isLoadMoreRunning = false;
+
+  void _loadData() async {
+    if (_controller.position.extentAfter < 1 && _isLoadMoreRunning == false) {
+      setState(() {
+        _isLoadMoreRunning = true;
+      });
+      BlocProvider.of<PokemonListBloc>(context)
+          .add(PokemonListLoadEvent(false));
+    }
+    setState(() {
+      _isLoadMoreRunning = false;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = ScrollController()..addListener(_loadData);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,28 +47,22 @@ class PaginationWidget<t> extends StatelessWidget {
       builder: (context, state) {
         if (state is PokemonListLoaded) {
           List<PokemonModel>? pokemonList = state.pokemonList.pokemonList;
-          return NotificationListener<ScrollEndNotification>(
-              onNotification: (scrollInfo) {
-                scrollInfo.metrics.pixels >
-                            scrollInfo.metrics.maxScrollExtent - 20 &&
-                        !(state.pokemonList.next == null)
-                    ? loadMore()
-                    : null;
-                return true;
-              },
-              child: Column(
-                children: [
-                  Expanded(
-                      child: ListView.builder(
-                          itemCount: pokemonList?.length,
-                          itemBuilder: (context, index) =>
-                              child(pokemonList?[index] as t))),
-                  if (state.error != null)
-                    const Expanded(child: CustomErrorWidget()),
-                  if (state.loading != null)
-                    const Expanded(child: LoadingWidget()),
-                ],
-              ));
+          return Column(
+            children: [
+              Expanded(
+                  child: ListView.builder(
+                      controller: _controller,
+                      itemCount: pokemonList!.length,
+                      itemBuilder: (context, index) =>
+                          widget.child(pokemonList[index]))),
+              if (state.error != null)
+                const Expanded(child: CustomErrorWidget()),
+              if (state.loading != null) const Expanded(child: LoadingWidget()),
+            ],
+          );
+        }
+        if (_isLoadMoreRunning) {
+          return const LoadingWidget();
         }
         if (state is PokemonListInitial) {
           return const LoadingWidget();

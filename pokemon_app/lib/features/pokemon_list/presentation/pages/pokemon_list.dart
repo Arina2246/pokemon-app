@@ -15,7 +15,7 @@ class PokemonListPage extends StatefulWidget {
 class _PokemonListPage extends State<PokemonListPage> {
   @override
   void initState() {
-    BlocProvider.of<PokemonListBloc>(context).add(PokemonListLoadEvent());
+    BlocProvider.of<PokemonListBloc>(context).add(PokemonListLoadEvent(true));
     super.initState();
   }
 
@@ -34,11 +34,8 @@ class _PokemonListPage extends State<PokemonListPage> {
         centerTitle: true,
       ),
       body: PaginationWidget<PokemonModel>(
-        loadMore: () {
-          BlocProvider.of<PokemonListBloc>(context).add(PokemonListLoadEvent());
-        },
-        child: (PokemonModel productModel) {
-          return PokemonCard(pokemon: productModel);
+        child: (PokemonModel pokemonModel) {
+          return PokemonCard(pokemon: pokemonModel);
         },
       ),
     );
