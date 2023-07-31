@@ -1,8 +1,8 @@
 import 'package:either_dart/src/either.dart';
 import 'dart:convert';
 import 'package:pokemon_app/features/pokemon_list/data/data_sources/pokemon_details/remote/pokemon_details_api_service.dart';
-import 'package:pokemon_app/features/pokemon_list/data/models/error.dart';
-import 'package:pokemon_app/features/pokemon_list/data/models/pokemon_details.dart';
+import 'package:pokemon_app/features/pokemon_list/data/models/remote/error.dart';
+import 'package:pokemon_app/features/pokemon_list/data/models/remote/pokemon_details.dart';
 import 'package:pokemon_app/features/pokemon_list/domain/entities/pokemon_details.dart';
 import 'package:pokemon_app/features/pokemon_list/domain/repository/pokemon_details_repository.dart';
 

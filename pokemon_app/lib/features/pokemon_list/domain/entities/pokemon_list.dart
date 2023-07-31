@@ -1,4 +1,4 @@
-import 'package:pokemon_app/features/pokemon_list/data/models/pokemon.dart';
+import 'package:pokemon_app/features/pokemon_list/data/models/remote/pokemon.dart';
 import 'package:equatable/equatable.dart';
 
 class PokemonListEntity extends Equatable {

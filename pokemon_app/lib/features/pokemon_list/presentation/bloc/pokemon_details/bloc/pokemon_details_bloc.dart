@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:pokemon_app/features/pokemon_list/data/models/pokemon_details.dart';
+import 'package:pokemon_app/features/pokemon_list/data/models/remote/pokemon_details.dart';
 import 'package:pokemon_app/features/pokemon_list/data/repository/pokemon_details_repository.dart';
 import 'package:pokemon_app/features/pokemon_list/domain/entities/pokemon_details.dart';
 

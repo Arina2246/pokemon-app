@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pokemon_app/features/pokemon_list/data/models/pokemon.dart';
+import 'package:pokemon_app/features/pokemon_list/data/models/remote/pokemon.dart';
 import 'package:pokemon_app/features/pokemon_list/presentation/bloc/pokemon_list/pokemon_list_bloc.dart';
 import 'package:pokemon_app/features/pokemon_list/presentation/widgets/empty.dart';
 import 'package:pokemon_app/features/pokemon_list/presentation/widgets/error.dart';
