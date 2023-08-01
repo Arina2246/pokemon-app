@@ -1,4 +1,5 @@
 import 'package:either_dart/src/either.dart';
+import 'package:pokemon_app/features/pokemon_list/data/data_sources/pokemon_details/local/pokemon_details_hive_service.dart';
 import 'dart:convert';
 import 'package:pokemon_app/features/pokemon_list/data/data_sources/pokemon_details/remote/pokemon_details_api_service.dart';
 import 'package:pokemon_app/features/pokemon_list/data/models/remote/error.dart';
@@ -15,12 +16,18 @@ class PokemonDetailsRepositoryImpl implements PokemonDetailsRepository {
       if (response.statusCode == 200) {
         var json = jsonDecode(response.body);
         PokemonDetailsModel pokemonDetails = PokemonDetailsModel.fromJson(json);
+        await PokemonDetailsHiveService().putData(url, pokemonDetails);
         return Right(pokemonDetails);
       } else {
         return const Left(Failure(message: 'Failed to parse json response'));
       }
     } catch (e) {
-      return const Left(Failure(message: 'Something went wrong'));
+      var cachedData = await PokemonDetailsHiveService().getData(url);
+      if (cachedData != null) {
+        return Right(cachedData);
+      } else {
+        return const Left(Failure(message: 'Something went wrong'));
+      }
     }
   }
 }
