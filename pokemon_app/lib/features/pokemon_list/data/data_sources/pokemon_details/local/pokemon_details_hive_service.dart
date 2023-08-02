@@ -9,12 +9,6 @@ class PokemonDetailsHiveService {
     var data = box.get(url);
 
     if (data != null) {
-      // List<PokemonModel> pokemonList = List.generate(
-      //     data.pokemonList!.length,
-      //     (index) => PokemonModel(
-      //         name: data.pokemonList![index].name!,
-      //         url: data.pokemonList![index].url!));
-
       PokemonDetailsModel dataObj = PokemonDetailsModel(
         name: data.name,
         img: data.img,
@@ -29,10 +23,6 @@ class PokemonDetailsHiveService {
   }
 
   Future putData(url, PokemonDetailsModel data) async {
-    // List<dynsmic> TypesList = List.generate(
-    //     data.types!.length,
-    //     (index) => PokemonLocal(
-    //         name: data.types![index].name!));
     box.put(
         url,
         PokemonDetailsLocal(

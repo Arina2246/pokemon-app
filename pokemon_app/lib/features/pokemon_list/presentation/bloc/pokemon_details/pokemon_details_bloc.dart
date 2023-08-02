@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:pokemon_app/features/pokemon_list/data/models/remote/pokemon_details.dart';
 import 'package:pokemon_app/features/pokemon_list/data/repository/pokemon_details_repository.dart';
 import 'package:pokemon_app/features/pokemon_list/domain/entities/pokemon_details.dart';
+import 'package:pokemon_app/features/pokemon_list/domain/usecases/usecases.dart';
 
 part 'pokemon_details_event.dart';
 part 'pokemon_details_state.dart';
@@ -29,7 +30,8 @@ class PokemonDetailsBloc
             ? emit(PokemonDetailsLoading(message: 'Fetching pokemons....'))
             : emit(PokemonDetailsLoaded(pokemonDetails: pokemonDetails));
         final response =
-            await PokemonDetailsRepositoryImpl().getPokemonDetails(url: url);
+            await GetPokemonDetailstUseCase(PokemonDetailsRepositoryImpl())
+                .call(params: url);
         response.fold(
             (l) => isInitial
                 ? emit(PokemonDetailsError(message: 'Failed to load pokemons'))

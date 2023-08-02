@@ -3,6 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:pokemon_app/features/pokemon_list/data/models/remote/pokemon_list.dart';
 import 'package:pokemon_app/features/pokemon_list/data/repository/pokemon_list_repository_iml.dart';
 import 'package:pokemon_app/features/pokemon_list/domain/entities/pokemon_list.dart';
+import 'package:pokemon_app/features/pokemon_list/domain/usecases/usecases.dart';
 
 import '../../../../../core/constants/constants.dart';
 
@@ -21,8 +22,9 @@ class PokemonListBloc extends Bloc<PokemonListEvent, PokemonListState> {
     on<PokemonListEvent>((event, emit) async {
       if (event is PokemonListLoadEvent) {
         isInitial = event.isInitial;
-        final response = await PokemonListRepositoryImpl()
-            .getPokemonList(url: pokemonList.next ?? initialPokemonURL);
+        final response =
+            await GetPokemonListUseCase(PokemonListRepositoryImpl())
+                .call(params: pokemonList.next ?? initialPokemonURL);
         response.fold(
             (l) => emit(
                 PokemonListInitialError(message: 'Failed to load pokemons')),

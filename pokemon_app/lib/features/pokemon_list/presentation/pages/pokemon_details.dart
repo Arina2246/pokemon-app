@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokemon_app/features/pokemon_list/domain/entities/pokemon_details.dart';
-import 'package:pokemon_app/features/pokemon_list/presentation/bloc/pokemon_details/bloc/pokemon_details_bloc.dart';
+import 'package:pokemon_app/features/pokemon_list/presentation/bloc/pokemon_details/pokemon_details_bloc.dart';
 import 'package:pokemon_app/features/pokemon_list/presentation/widgets/error.dart';
 import 'package:pokemon_app/features/pokemon_list/presentation/widgets/loading.dart';
 
@@ -75,7 +75,6 @@ class _PokemonPageState extends State<PokemonDetailsPage> {
                           horizontal: 22, vertical: 10),
                       child: SizedBox(
                         width: MediaQuery.of(context).size.width,
-                        // height: 100,
                         child: Column(children: [
                           const SizedBox(
                             height: 20,
